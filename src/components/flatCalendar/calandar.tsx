@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useState } from "react";
+import { CSSProperties, FC } from "react";
 import {
   GridContainer,
   FlatContainer,
@@ -42,7 +42,7 @@ const FlatCalendar: FC<FlatCalender> = ({
   todayBackground = "#e2e2e2",
   showDisableDays = false,
 }) => {
-  const rtlCondition = calenderType === "JALALI";
+  const rtlCondition = calenderType === "GREGORIAN";
   const calendarState = useCalendar({ type: calenderType });
 
   const {
@@ -53,8 +53,11 @@ const FlatCalendar: FC<FlatCalender> = ({
     showDay,
     handleNxtMonth,
     handlePrvMonth,
+    yearsNumber,
+    monthNumber,
+    todayNumber,
   } = calendarState;
-  
+
   return (
     <FlatContainer
       height={height}

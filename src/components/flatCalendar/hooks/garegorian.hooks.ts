@@ -100,6 +100,7 @@ const useGaregorian = (showDisableDays: boolean) => {
     showDay,
     handleNxtMonth,
     handlePrvMonth,
+    monthNumber, yearsNumber, todayNumber
   };
 };
 export default useGaregorian;

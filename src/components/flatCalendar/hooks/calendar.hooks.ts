@@ -5,12 +5,12 @@ const useCalendar = ({
   type,
   showDisableDays = false,
 }: {
-  type: "JALALI" | "GAREGORIAN";
+  type: "JALALI" | "GREGORIAN";
   showDisableDays?: boolean;
 }) => {
-  const jalali = useJalali(showDisableDays);
+  const jalali = useJalali();
   const garegorian = useGaregorian(showDisableDays);
 
-  return type === "JALALI" ? jalali : garegorian;
+  return garegorian;
 };
 export default useCalendar;

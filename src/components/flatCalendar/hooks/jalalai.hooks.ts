@@ -1,6 +1,2 @@
-const useJalali = () => {
-    
-    
-    
-}
-export default useJalali
+const useJalali = () => {};
+export default useJalali;

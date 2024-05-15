@@ -13,10 +13,11 @@ import PrevIcon from "@/assets/icons/Prev";
 
 import {
   gregorianDays,
-  gregorianMonth,
+  gregorianMonthOprions,
   jalaliDays,
 } from "../../constants/string";
 import useCalendar from "./hooks/calendar.hooks";
+import CustomSelect from "../common/Select";
 
 interface FlatCalender {
   width?: string;
@@ -43,7 +44,7 @@ const FlatCalendar: FC<FlatCalender> = ({
   showDisableDays = false,
 }) => {
   const rtlCondition = calenderType === "GREGORIAN";
-  const calendarState = useCalendar({ type: calenderType });
+  const calendarState = useCalendar({ type: calenderType, showDisableDays });
 
   const {
     lastMonth,
@@ -56,6 +57,8 @@ const FlatCalendar: FC<FlatCalender> = ({
     yearsNumber,
     monthNumber,
     todayNumber,
+    selectMonth,
+    handleSelectMonth,
   } = calendarState;
 
   return (
@@ -67,7 +70,12 @@ const FlatCalendar: FC<FlatCalender> = ({
     >
       <RowContainerBetween>
         <RowContainer style={iconsStyle || {}}>
-          <span>{gregorianMonth[monthNumber]}</span>
+          <CustomSelect
+            options={gregorianMonthOprions}
+            onChange={handleSelectMonth}
+            value={selectMonth}
+          />
+
           <span>{yearsNumber}</span>
         </RowContainer>
         {

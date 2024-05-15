@@ -1,9 +1,14 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
+import moment from "moment";
+import { gregorianMonthOprions } from "@/constants/string";
+import { Options } from "@/components/common/Select/type";
 
 const useGaregorian = (showDisableDays: boolean) => {
   const todayNumber = moment().date();
-  const [monthNumber, setMonthNumber] = useState<number>(moment().month() || 1);
+  const [monthNumber, setMonthNumber] = useState<number>(moment().month() || 0);
+  const [selectMonth, setSelectMonth] = useState<Options>(
+    gregorianMonthOprions[monthNumber]
+  );
   const [yearsNumber, setYearsNumber] = useState<number>(moment().year() || 0);
   const [lastMonth, setLastMonth] = useState<string>("");
   const [nextMonth, setNextMonth] = useState<string>("");
@@ -78,11 +83,21 @@ const useGaregorian = (showDisableDays: boolean) => {
     }
   }, [yearsNumber, monthNumber, showDisableDays]);
 
+  const handleSelectMonth = (monthName: Options) => {
+    if (monthName) {
+      setSelectMonth(monthName);
+      const convertedNameToNumber = Number(
+        moment().month(monthName.value).format("M")
+      );
+      setMonthNumber(convertedNameToNumber - 1);
+    }
+  };
   const handleNxtMonth = () => {
     setMonthNumber((monthNumber) => (monthNumber === 11 ? 0 : monthNumber + 1));
     if (monthNumber === 11) {
       setYearsNumber((monthNumber) => monthNumber + 1);
     }
+    setSelectMonth(gregorianMonthOprions[monthNumber + 1]);
   };
 
   const handlePrvMonth = () => {
@@ -90,6 +105,7 @@ const useGaregorian = (showDisableDays: boolean) => {
     if (monthNumber === 0) {
       setYearsNumber((monthNumber) => monthNumber - 1);
     }
+    setSelectMonth(gregorianMonthOprions[monthNumber - 1]);
   };
 
   return {
@@ -100,7 +116,11 @@ const useGaregorian = (showDisableDays: boolean) => {
     showDay,
     handleNxtMonth,
     handlePrvMonth,
-    monthNumber, yearsNumber, todayNumber
+    monthNumber,
+    yearsNumber,
+    todayNumber,
+    selectMonth,
+    handleSelectMonth,
   };
 };
 export default useGaregorian;

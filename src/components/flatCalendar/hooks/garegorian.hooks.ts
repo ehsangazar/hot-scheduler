@@ -97,7 +97,10 @@ const useGaregorian = (showDisableDays: boolean) => {
     if (monthNumber === 11) {
       setYearsNumber((monthNumber) => monthNumber + 1);
     }
-    setSelectMonth(gregorianMonthOprions[monthNumber + 1]);
+    console.log("sdfdsf", gregorianMonthOprions[monthNumber + 1]);
+    setSelectMonth(
+      gregorianMonthOprions[monthNumber === 11 ? 0 : monthNumber + 1]
+    );
   };
 
   const handlePrvMonth = () => {
@@ -105,7 +108,9 @@ const useGaregorian = (showDisableDays: boolean) => {
     if (monthNumber === 0) {
       setYearsNumber((monthNumber) => monthNumber - 1);
     }
-    setSelectMonth(gregorianMonthOprions[monthNumber - 1]);
+    setSelectMonth(
+      gregorianMonthOprions[monthNumber === 0 ? 11 : monthNumber - 1]
+    );
   };
 
   return {

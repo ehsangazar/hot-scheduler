@@ -125,6 +125,7 @@ const useGaregorian = (showDisableDays: boolean) => {
     yearsNumber,
     todayNumber,
     selectMonth,
+    setYearsNumber,
     handleSelectMonth,
   };
 };

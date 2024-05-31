@@ -18,6 +18,7 @@ import {
 } from "../../constants/string";
 import useCalendar from "./hooks/calendar.hooks";
 import CustomSelect from "../common/Select";
+import YearPicker from "./yearPicker";
 
 interface FlatCalender {
   width?: string;
@@ -58,6 +59,7 @@ const FlatCalendar: FC<FlatCalender> = ({
     monthNumber,
     todayNumber,
     selectMonth,
+    setYearsNumber,
     handleSelectMonth,
   } = calendarState;
 
@@ -76,7 +78,8 @@ const FlatCalendar: FC<FlatCalender> = ({
             value={selectMonth}
           />
 
-          <span>{yearsNumber}</span>
+          <YearPicker year={yearsNumber} setYear={setYearsNumber} />
+          {/* <span>{yearsNumber}</span> */}
         </RowContainer>
         {
           <RowContainer gap="2rem" style={titleStyle || {}}>
